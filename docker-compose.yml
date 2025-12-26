@@ -1,0 +1,10 @@
+services:
+  playwright-server:
+    build: .
+    image: playwright-server
+    container_name: playwright-server
+    ports:
+      - "5400:5400"
+    restart: unless-stopped
+    # Shared memory size might need to be increased for browser stability
+    shm_size: '2gb'
