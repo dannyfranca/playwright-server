@@ -9,11 +9,11 @@ RUN apt-get update && apt-get install -y curl gnupg2 ca-certificates && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy package files
-COPY package.json .
+# Copy package files (including lock file for reproducible builds)
+COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies (npm ci uses lock file for exact versions)
+RUN npm ci
 
 # Install Playwright Chromium browser and system dependencies
 # This ensures we only download Chrome, keeping the image lighter than the official one
