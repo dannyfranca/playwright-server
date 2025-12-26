@@ -1,0 +1,18 @@
+[Unit]
+Description=Playwright Server Container
+After=network-online.target
+
+[Container]
+Image=playwright-server
+ContainerName=playwright-server
+PublishPort=5400:5400
+# Increase shared memory for browser stability
+ShmSize=2g
+# Build the image if it doesn't exist (requires Quadlet build support or manual build)
+# Typically Quadlet assumes image exists. We'll note manual build in README.
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
